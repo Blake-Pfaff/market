@@ -1,0 +1,21 @@
+version: '3.6'
+services:
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: test
+      MYSQL_DATABASE: MarketPlace
+      MYSQL_USER: Blake
+      MYSQL_PASSWORD: test
+    volumes:
+      - marketplace_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  adminer:
+    image: adminer
+    ports:
+      - 8085:8080
+
+volumes:
+  marketplace_data:

@@ -10,7 +10,7 @@ services:
     volumes:
       - marketplace_data:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 3333:3306
 
   adminer:
     image: adminer

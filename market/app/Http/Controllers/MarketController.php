@@ -14,7 +14,7 @@ class MarketController extends Controller
      */
     public function index()
     {
-        $markets = Market::all();
+        $markets = Market::orderBy('name', 'asc')->paginate(9);
         return view('markets.index', ['markets' => $markets]);
     }
 
@@ -25,7 +25,7 @@ class MarketController extends Controller
      */
     public function create()
     {
-        //
+        return view('markets.create');
     }
 
     /**
@@ -36,7 +36,13 @@ class MarketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'bail|required|unique:markets|max:225',
+            'website' => 'bail|required',
+            'city' => 'bail|required',
+        ]);
+        Market::create($request->all());
+        return redirect('markets');
     }
 
     /**
@@ -47,7 +53,7 @@ class MarketController extends Controller
      */
     public function show(Market $market)
     {
-        //
+        return view('markets.show', ['market' => $market]);
     }
 
     /**
